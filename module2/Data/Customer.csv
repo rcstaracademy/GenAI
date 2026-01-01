@@ -1,0 +1,101 @@
+CustomerID,Age,Gender,Income,Spending Score,Purchase Frequency,Tenure,Location/City,Membership Level,Last Purchase Date,Preferred Category
+C001,28,Female,52000,78,12,3,New York,Gold,2025-11-20,Electronics
+C002,35,Male,68000,65,8,5,Los Angeles,Silver,2025-10-15,Fashion
+C003,42,Female,75000,82,15,7,Chicago,Platinum,2025-11-30,Home Decor
+C004,23,Male,41000,55,6,1,Houston,Bronze,2025-09-27,Sports
+C005,31,Female,59000,73,10,4,Phoenix,Gold,2025-12-01,Beauty
+C006,47,Male,88000,90,18,9,Philadelphia,Platinum,2025-11-14,Electronics
+C007,29,Non-Binary,63000,69,9,2,San Antonio,Silver,2025-11-22,Groceries
+C008,52,Female,92000,88,14,10,San Diego,Platinum,2025-10-08,Travel
+C009,38,Male,57000,60,7,6,Dallas,Gold,2025-11-18,Fashion
+C010,26,Female,46000,72,11,2,San Jose,Silver,2025-11-25,Books
+C011,33,Male,68000,77,13,4,Austin,Gold,2025-11-19,Electronics
+C012,45,Female,82000,84,16,8,Jacksonville,Platinum,2025-10-30,Home Decor
+C013,54,Male,95000,89,17,10,Fort Worth,Platinum,2025-11-02,Travel
+C014,27,Female,51000,70,9,3,Columbus,Silver,2025-10-05,Beauty
+C015,39,Male,73000,66,8,6,Charlotte,Silver,2025-11-08,Sports
+C016,48,Female,88000,91,19,11,San Francisco,Platinum,2025-11-29,Electronics
+C017,22,Male,39000,57,5,1,Indianapolis,Bronze,2025-10-12,Fashion
+C018,36,Female,64000,74,12,5,Seattle,Gold,2025-11-26,Home Decor
+C019,41,Male,76000,63,7,7,Denver,Silver,2025-11-17,Groceries
+C020,30,Female,60000,80,14,3,Washington,Gold,2025-11-03,Travel
+C021,46,Male,87000,86,15,9,Boston,Platinum,2025-10-11,Electronics
+C022,33,Female,71000,75,11,6,El Paso,Gold,2025-09-29,Fashion
+C023,50,Male,92000,88,17,10,Nashville,Platinum,2025-11-12,Home Decor
+C024,29,Female,54000,71,10,2,Detroit,Silver,2025-11-16,Beauty
+C025,38,Male,69000,62,8,5,Memphis,Silver,2025-10-14,Sports
+C026,58,Female,99000,93,19,12,Portland,Platinum,2025-12-01,Travel
+C027,24,Male,42000,59,6,1,Oklahoma City,Bronze,2025-11-06,Books
+C028,40,Female,77000,78,13,7,Las Vegas,Gold,2025-10-24,Electronics
+C029,32,Male,65000,67,9,3,Louisville,Silver,2025-11-27,Groceries
+C030,47,Female,88000,85,15,9,Baltimore,Gold,2025-11-21,Beauty
+C031,55,Male,94000,90,16,11,Milwaukee,Platinum,2025-10-31,Travel
+C032,26,Female,46000,72,11,2,Albuquerque,Silver,2025-11-09,Fashion
+C033,37,Male,72000,64,8,6,Tucson,Silver,2025-09-25,Sports
+C034,43,Female,81000,83,14,8,Fresno,Gold,2025-11-28,Home Decor
+C035,51,Male,93000,89,17,10,Sacramento,Platinum,2025-11-04,Electronics
+C036,28,Female,58000,76,12,3,Kansas City,Gold,2025-11-11,Groceries
+C037,34,Male,69000,68,9,5,Long Beach,Silver,2025-10-17,Beauty
+C038,49,Female,87000,87,15,9,Mesa,Gold,2025-11-30,Travel
+C039,22,Male,40000,56,6,1,Atlanta,Bronze,2025-09-22,Books
+C040,31,Female,63000,74,13,4,Colorado Springs,Gold,2025-11-18,Fashion
+C041,45,Male,85000,82,14,9,Raleigh,Gold,2025-11-07,Home Decor
+C042,52,Female,92000,91,18,11,Omaha,Platinum,2025-10-10,Electronics
+C043,29,Male,59000,70,10,2,Miami,Silver,2025-11-23,Travel
+C044,41,Female,76000,79,12,7,Oakland,Gold,2025-11-15,Beauty
+C045,56,Male,98000,92,19,12,Minneapolis,Platinum,2025-10-22,Home Decor
+C046,24,Female,44000,62,7,1,Tulsa,Bronze,2025-11-02,Groceries
+C047,39,Male,71000,66,9,6,Wichita,Silver,2025-11-05,Fashion
+C048,48,Female,89000,90,17,10,New Orleans,Platinum,2025-11-25,Travel
+C049,53,Male,95000,84,14,11,Arlington,Gold,2025-10-27,Electronics
+C050,27,Female,52000,73,11,3,Bakersfield,Silver,2025-11-20,Beauty
+C051,36,Male,70000,65,8,5,Tampa,Silver,2025-09-28,Sports
+C052,44,Female,81000,85,15,9,Aurora,Gold,2025-11-29,Books
+C053,50,Male,93000,89,17,10,Honolulu,Platinum,2025-11-18,Groceries
+C054,28,Female,58000,76,12,3,Stockton,Gold,2025-10-13,Fashion
+C055,33,Male,67000,64,7,4,Henderson,Silver,2025-11-16,Home Decor
+C056,46,Female,86000,88,16,9,Plano,Gold,2025-11-03,Electronics
+C057,55,Male,97000,91,18,11,Lincoln,Platinum,2025-10-25,Beauty
+C058,23,Female,42000,58,6,1,Chandler,Bronze,2025-11-10,Sports
+C059,35,Male,69000,72,10,5,Greensboro,Gold,2025-11-28,Books
+C060,49,Female,88000,87,15,10,Chula Vista,Gold,2025-11-14,Travel
+C061,40,Male,76000,81,13,7,Irvine,Gold,2025-11-26,Fashion
+C062,52,Female,94000,92,19,11,Orlando,Platinum,2025-10-09,Home Decor
+C063,30,Male,61000,69,9,3,Laredo,Silver,2025-11-17,Electronics
+C064,37,Female,74000,77,12,6,Madison,Gold,2025-11-12,Groceries
+C065,43,Male,82000,83,14,7,Durham,Gold,2025-10-30,Beauty
+C066,51,Female,91000,88,16,10,Lubbock,Platinum,2025-11-24,Travel
+C067,26,Male,50000,71,8,2,Garland,Silver,2025-11-09,Books
+C068,34,Female,66000,73,10,4,Glendale,Gold,2025-11-27,Electronics
+C069,47,Male,87000,86,15,9,Reno,Gold,2025-11-01,Home Decor
+C070,54,Female,98000,93,19,12,Hialeah,Platinum,2025-10-21,Travel
+C071,25,Male,45000,62,7,1,Baton Rouge,Bronze,2025-11-06,Fashion
+C072,38,Female,72000,79,12,6,Chesapeake,Gold,2025-11-19,Beauty
+C073,45,Male,84000,82,14,8,Scottsdale,Gold,2025-11-22,Books
+C074,29,Female,56000,75,11,3,North Las Vegas,Silver,2025-10-18,Home Decor
+C075,41,Male,77000,68,8,7,Fremont,Silver,2025-11-03,Sports
+C076,50,Female,92000,87,15,10,Boise,Gold,2025-11-28,Groceries
+C077,57,Male,99000,94,20,13,Richmond,Platinum,2025-11-07,Electronics
+C078,32,Female,60000,74,11,4,San Bernardino,Gold,2025-11-15,Fashion
+C079,36,Male,72000,70,9,5,Spokane,Silver,2025-10-12,Travel
+C080,48,Female,89000,89,17,9,Des Moines,Gold,2025-11-20,Beauty
+C081,53,Male,94000,91,18,11,Modesto,Platinum,2025-11-29,Books
+C082,24,Female,44000,61,6,1,Tacoma,Bronze,2025-10-09,Sports
+C083,39,Male,74000,77,12,6,Fontana,Gold,2025-11-04,Home Decor
+C084,46,Female,86000,85,15,9,Oxnard,Gold,2025-11-21,Travel
+C085,58,Male,102000,95,20,14,Moreno Valley,Platinum,2025-11-11,Electronics
+C086,31,Female,62000,73,10,4,Fayetteville,Gold,2025-11-27,Groceries
+C087,44,Male,82000,80,13,8,Shreveport,Gold,2025-10-26,Fashion
+C088,52,Female,91000,88,16,11,Akron,Platinum,2025-11-14,Beauty
+C089,29,Male,58000,69,9,3,Montgomery,Silver,2025-11-10,Books
+C090,37,Female,75000,78,12,6,Grand Rapids,Gold,2025-11-23,Home Decor
+C091,49,Male,88000,84,14,10,Huntsville,Gold,2025-11-18,Travel
+C092,55,Female,97000,92,19,12,Salt Lake City,Platinum,2025-10-15,Electronics
+C093,26,Male,49000,63,7,2,Amarillo,Silver,2025-11-08,Sports
+C094,34,Female,66000,72,10,4,Tallahassee,Gold,2025-11-05,Fashion
+C095,43,Male,82000,81,13,7,Mobile,Gold,2025-11-24,Beauty
+C096,50,Female,93000,90,17,10,Little Rock,Platinum,2025-11-29,Travel
+C097,28,Male,56000,74,11,3,Anaheim,Gold,2025-11-13,Books
+C098,39,Female,73000,76,12,6,Augusta,Gold,2025-10-19,Home Decor
+C099,47,Male,87000,85,15,9,Grand Prairie,Gold,2025-11-16,Electronics
+C100,53,Female,96000,91,18,11,Brownsville,Platinum,2025-11-30,Travel
