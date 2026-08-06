@@ -1,0 +1,362 @@
+# Complete Google Colab QLoRA Code for Language Translation (One Language to Another)
+
+This notebook fine-tunes a pre-trained Large Language Model (LLM) using QLoRA for translation tasks in Google Colab.
+
+Example:
+
+* English → Hindi
+* English → French
+* Hindi → English
+* Any language pair supported by your dataset
+
+---
+
+# Step 1: Install Required Libraries
+
+```python
+!pip install -q transformers datasets accelerate peft bitsandbytes trl sentencepiece
+```
+
+---
+
+# Step 2: Import Libraries
+
+```python
+import torch
+from datasets import Dataset
+from transformers import (
+    AutoTokenizer,
+    AutoModelForCausalLM,
+    TrainingArguments,
+    Trainer,
+    DataCollatorForLanguageModeling,
+    BitsAndBytesConfig
+)
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+```
+
+---
+
+# Step 3: Select Device
+
+```python
+device = "cuda" if torch.cuda.is_available() else "cpu"
+print("Using Device:", device)
+```
+
+---
+
+# Step 4: Load Translation Dataset
+
+You can replace this dataset with your own CSV file.
+
+Example Dataset:
+
+```python
+translation_data = {
+    "source": [
+        "How are you?",
+        "What is your name?",
+        "Good morning",
+        "I love learning AI",
+        "Where are you going?",
+        "Welcome to India",
+        "Machine learning is powerful",
+        "I am happy today",
+        "This is a beautiful place",
+        "Can you help me?"
+    ],
+    "target": [
+        "आप कैसे हैं?",
+        "आपका नाम क्या है?",
+        "सुप्रभात",
+        "मुझे AI सीखना पसंद है",
+        "आप कहाँ जा रहे हैं?",
+        "भारत में आपका स्वागत है",
+        "मशीन लर्निंग शक्तिशाली है",
+        "मैं आज खुश हूँ",
+        "यह एक सुंदर जगह है",
+        "क्या आप मेरी मदद कर सकते हैं?"
+    ]
+}
+
+train_dataset = Dataset.from_dict(translation_data)
+```
+
+---
+
+# Step 5: Load Pretrained Model
+
+Recommended Small Models for Colab:
+
+* TinyLlama
+* Mistral 7B
+* LLaMA 3 8B (High RAM)
+
+```python
+model_name = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+```
+
+---
+
+# Step 6: Configure QLoRA Quantization
+
+```python
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_use_double_quant=True,
+    bnb_4bit_compute_dtype=torch.float16
+)
+```
+
+---
+
+# Step 7: Load Tokenizer
+
+```python
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+if tokenizer.pad_token is None:
+    tokenizer.pad_token = tokenizer.eos_token
+```
+
+---
+
+# Step 8: Load Quantized Model
+
+```python
+model = AutoModelForCausalLM.from_pretrained(
+    model_name,
+    quantization_config=bnb_config,
+    device_map="auto"
+)
+```
+
+---
+
+# Step 9: Prepare Model for QLoRA Training
+
+```python
+model.gradient_checkpointing_enable()
+model = prepare_model_for_kbit_training(model)
+```
+
+---
+
+# Step 10: Configure LoRA
+
+```python
+lora_config = LoraConfig(
+    r=16,
+    lora_alpha=32,
+    target_modules=[
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj"
+    ],
+    lora_dropout=0.05,
+    bias="none",
+    task_type="CAUSAL_LM"
+)
+```
+
+---
+
+# Step 11: Apply QLoRA
+
+```python
+model = get_peft_model(model, lora_config)
+model.print_trainable_parameters()
+```
+
+---
+
+# Step 12: Create Translation Prompt
+
+```python
+def format_translation(example):
+    prompt = f"""
+Translate the following sentence.
+
+Source: {example['source']}
+Target: {example['target']}
+"""
+    return {"text": prompt}
+
+formatted_dataset = train_dataset.map(format_translation)
+```
+
+---
+
+# Step 13: Tokenize Dataset
+
+```python
+max_length = 128
+
+
+def tokenize_function(example):
+    result = tokenizer(
+        example["text"],
+        truncation=True,
+        padding="max_length",
+        max_length=max_length
+    )
+
+    result["labels"] = result["input_ids"].copy()
+    return result
+
+
+tokenized_dataset = formatted_dataset.map(tokenize_function)
+```
+
+---
+
+# Step 14: Data Collator
+
+```python
+data_collator = DataCollatorForLanguageModeling(
+    tokenizer=tokenizer,
+    mlm=False
+)
+```
+
+---
+
+# Step 15: Training Arguments
+
+```python
+training_args = TrainingArguments(
+    output_dir="./translation_qlora",
+    per_device_train_batch_size=2,
+    gradient_accumulation_steps=2,
+    learning_rate=2e-4,
+    num_train_epochs=5,
+    logging_steps=5,
+    save_strategy="epoch",
+    fp16=True,
+    optim="paged_adamw_8bit",
+    report_to="none"
+)
+```
+
+---
+
+# Step 16: Trainer
+
+```python
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=tokenized_dataset,
+    data_collator=data_collator
+)
+```
+
+---
+
+# Step 17: Train Model
+
+```python
+trainer.train()
+```
+
+---
+
+# Step 18: Save QLoRA Model
+
+```python
+model.save_pretrained("translation_qlora_model")
+tokenizer.save_pretrained("translation_qlora_model")
+```
+
+---
+
+# Step 19: Translation Inference
+
+```python
+def translate_text(text):
+    prompt = f"Translate the following sentence.\n\nSource: {text}\nTarget:"
+
+    inputs = tokenizer(prompt, return_tensors="pt").to(device)
+
+    outputs = model.generate(
+        **inputs,
+        max_new_tokens=50,
+        temperature=0.7,
+        do_sample=True
+    )
+
+    result = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    return result
+```
+
+---
+
+# Step 20: Test Translation
+
+```python
+sentence = "How are you today?"
+
+translation = translate_text(sentence)
+print(translation)
+```
+
+---
+
+# Optional: Load CSV Dataset
+
+If you have your own translation dataset.
+
+```python
+import pandas as pd
+
+csv_path = "/content/translation_dataset.csv"
+
+df = pd.read_csv(csv_path)
+
+# CSV should contain:
+# source,target
+
+train_dataset = Dataset.from_pandas(df)
+```
+
+---
+
+# Recommended Translation Dataset Format
+
+| source       | target   |
+| ------------ | -------- |
+| Hello        | नमस्ते   |
+| Good morning | सुप्रभात |
+| Thank you    | धन्यवाद  |
+
+---
+
+# Recommended Models
+
+* TinyLlama/TinyLlama-1.1B-Chat-v1.0
+* mistralai/Mistral-7B-v0.1
+* meta-llama/Meta-Llama-3-8B
+
+---
+
+# Colab GPU Recommendation
+
+* T4 GPU → TinyLlama
+* L4 GPU → Mistral 7B
+* A100 → LLaMA 3
+
+---
+
+# Output
+
+After training, the model learns translation between your selected languages using QLoRA.
+
+You can extend this to:
+
+* English → Hindi
+* English → French
+* Hindi → German
+* Multi-language translation
